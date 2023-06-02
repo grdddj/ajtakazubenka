@@ -1,0 +1,15 @@
+[
+    {
+        "id": "question1",
+        "question": "What is the capital of France?",
+        "type": "choice",
+        "options": ["Paris", "London", "Rome"],
+        "answer": "Paris"
+    },
+    {
+        "id": "question2",
+        "question": "What is the square root of 144?",
+        "type": "text",
+        "answer": "12"
+    }
+]

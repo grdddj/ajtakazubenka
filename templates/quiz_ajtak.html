@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ajtak quiz</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            body {
+                background-color: rgb(238, 255, 0);
+            }
+
+            div {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <h3>Input four-digit PIN</h3>
+            <form action="?" method="{{ method }}">
+                {% if token %}
+                <input type="hidden" name="token" value="{{ token }}" />
+                {% endif %}
+                <input
+                    type="password"
+                    name="pin"
+                    pattern="[0-9]{4}"
+                    inputmode="numeric"
+                    placeholder="PIN"
+                    required
+                />
+                <input type="submit" value="Submit" />
+            </form>
+            {% if invalid_pin %}
+            <p style="color: red">Wrong PIN!</p>
+            {% endif %} {% if hidden_message %}
+            <p style="color: green">{{ hidden_message }}</p>
+            {% endif %}
+        </div>
+    </body>
+</html>
