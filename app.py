@@ -5,7 +5,6 @@ from __future__ import annotations
 from pathlib import Path
 import json
 from typing import List, Union
-from copy import deepcopy
 
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
@@ -14,7 +13,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
-from common import get_logger, LoggingMiddleware, generate_random_id
+from common import get_logger, LoggingMiddleware
 
 
 HERE = Path(__file__).parent
@@ -76,12 +75,12 @@ async def level_0_get_for_everything(request: Request):
     if pin == get_pin():
         return templates.TemplateResponse(
             "quiz_ajtak.html",
-            {"request": request, "level": 0, "token": None, "invalid_pin": False, "hidden_message": get_hidden_words_ajtak()},
+            {"request": request, "method": "get", "level": 0, "token": None, "invalid_pin": False, "hidden_message": get_hidden_words_ajtak()},
         )
     else:
         return templates.TemplateResponse(
             "quiz_ajtak.html",
-            {"request": request, "level": 0, "token": None, "invalid_pin": pin is not None, "hidden_message": None},
+            {"request": request, "method": "get", "level": 0, "token": None, "invalid_pin": pin is not None, "hidden_message": None},
         )
 
 
@@ -110,7 +109,7 @@ async def submit_quiz(quiz_data: QuizData):
     questions = get_questions()
 
     if not len(quiz_data.answers) == len(questions):
-        return {"message": "Incorrect!", "is_correct": False, "extra_data": ""}
+        return {"message": "Špatně!", "is_correct": False, "extra_data": ""}
 
     is_correct = True
     for answer in quiz_data.answers:
@@ -128,8 +127,8 @@ async def submit_quiz(quiz_data: QuizData):
             break
 
     if is_correct:
-        message = "Correct! " + get_hidden_words_zubenka()
+        message = "Správně! " + get_hidden_words_zubenka()
     else:
-        message = "Incorrect!"
+        message = "Špatně!"
     
     return {"message": message, "is_correct": is_correct}

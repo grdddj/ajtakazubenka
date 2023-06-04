@@ -6,7 +6,7 @@ function renderQuestions() {
     QUESTIONS.forEach((question, index) => {
         const questionElement = document.createElement('div');
         questionElement.innerHTML = `
-            <h2>Question ${index + 1}</h2>
+            <h2>Otázka ${index + 1}</h2>
             <p>${question.question}</p>
         `;
 
@@ -48,7 +48,7 @@ window.onload = function () {
                         );
                         if (!possibly_checked) {
                             throw new Error(
-                                `Please answer question ${question.id}`
+                                `Prosím zodpovězte otázku ${question.id}`
                             );
                         }
                         return {
@@ -59,7 +59,7 @@ window.onload = function () {
                         let answer = document.getElementById(question.id).value;
                         if (!answer) {
                             throw new Error(
-                                `Please answer question ${question.id}`
+                                `Prosím zodpovězte otázku ${question.id}`
                             );
                         }
                         return {
@@ -79,7 +79,7 @@ window.onload = function () {
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.is_correct) {
-                            alert('Correct! See the results below.');
+                            alert('Správně! Výsledky se zobrazí pod kvízem.');
                         }
 
                         document.getElementById('result').innerHTML =

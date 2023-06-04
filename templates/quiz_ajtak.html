@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Ajtak quiz</title>
+        <title>Kvíz pro Ajťáka</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style>
             body {
                 background-color: rgb(238, 255, 0);
+                font-size: 200%;
             }
 
             div {
@@ -16,12 +17,23 @@
                 align-items: center;
                 height: 100vh;
             }
+
+            input[type='submit'] {
+                font-size: 140%;
+                padding: 0.2em;
+            }
+
+            input[type='password'] {
+                font-size: 140%;
+                padding: 0.2em;
+                width: 3em;
+            }
         </style>
     </head>
 
     <body>
         <div>
-            <h3>Input four-digit PIN</h3>
+            <h3>Zadejte čtyřmístný číselný PIN</h3>
             <form action="?" method="{{ method }}">
                 {% if token %}
                 <input type="hidden" name="token" value="{{ token }}" />
@@ -34,10 +46,10 @@
                     placeholder="PIN"
                     required
                 />
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Odeslat" />
             </form>
             {% if invalid_pin %}
-            <p style="color: red">Wrong PIN!</p>
+            <p style="color: red">Velký špatný!</p>
             {% endif %} {% if hidden_message %}
             <p style="color: green">{{ hidden_message }}</p>
             {% endif %}
