@@ -106,7 +106,7 @@ async def questions(request: Request):
 
 @app.post("/quiz/zubenka/submit_quiz")
 async def submit_quiz(quiz_data: QuizData):
-    print(quiz_data)
+    logger.info(quiz_data)
     questions = get_questions()
 
     if not len(quiz_data.answers) == len(questions):
