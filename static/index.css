@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    margin: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: #337ab7;
+    padding: 10px;
+    border: 1px solid #337ab7;
+    border-radius: 5px;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+    background-color: #337ab7;
+    color: #f2f2f2;
+}
+
+a:visited {
+    color: #5c3c6d;
+}
+
+a[href^="https://www.coinomi.com/en/"]
+{
+    color: #f60;
+    border-color: #f60;
+}
+
+a[href^="https://www.coinomi.com/en/"]:hover
+{
+    background-color: #f60;
+    color: #f2f2f2;
+}
