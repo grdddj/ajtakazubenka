@@ -80,6 +80,10 @@ window.onload = function () {
                     .then((data) => {
                         if (data.is_correct) {
                             alert('Správně! Výsledky se zobrazí pod kvízem.');
+                        } else {
+                            alert(
+                                'Špatně! Zkuste to znovu.'
+                            );
                         }
 
                         document.getElementById('result').innerHTML =

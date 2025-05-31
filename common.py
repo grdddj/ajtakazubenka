@@ -26,7 +26,7 @@ def get_client_ip(request: Request) -> str:
     return request.client.host
 
 
-def generate_random_id(bytes: int = 5):
+def generate_random_id(bytes: int = 5) -> str:
     return secrets.token_hex(bytes)
 
 

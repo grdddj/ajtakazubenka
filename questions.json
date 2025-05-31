@@ -1,15 +1,57 @@
 [
     {
         "id": "question1",
-        "question": "What is the capital of France?",
+        "question": "S kterým bohem bojoval Percy Jackson nejdříve?",
         "type": "choice",
-        "options": ["Paris", "London", "Rome"],
-        "answer": "Paris"
+        "options": [
+            "Arés",
+            "Minerva",
+            "Hádes"
+        ],
+        "answer": "Arés"
     },
     {
         "id": "question2",
-        "question": "What is the square root of 144?",
-        "type": "text",
-        "answer": "12"
+        "question": "Jak se jmenuje dcera Edvarda a Belly?",
+        "type": "choice",
+        "options": [
+            "Bellatrixie",
+            "Renesmé",
+            "Elisabeth"
+        ],
+        "answer": "Renesmé"
+    },
+    {
+        "id": "question3",
+        "question": "Jak se jmenuje gang, ve kterém jsou Inej a Kaz?",
+        "type": "choice",
+        "options": [
+            "Krkavci",
+            "Přístavní pobudové",
+            "Gauneři"
+        ],
+        "answer": "Gauneři"
+    },
+    {
+        "id": "question4",
+        "question": "Jaký z následujících dvorů není oficiální součástí Prythianu?",
+        "type": "choice",
+        "options": [
+            "Autumn Court",
+            "Dawn Court",
+            "Illyrian Court"
+        ],
+        "answer": "Illyrian Court"
+    },
+    {
+        "id": "question5",
+        "question": "Jaký griša je Alina Starková?",
+        "type": "choice",
+        "options": [
+            "Korporálčice",
+            "Eterálčice",
+            "Materialčice"
+        ],
+        "answer": "Eterálčice"
     }
 ]

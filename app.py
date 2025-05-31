@@ -2,19 +2,16 @@
 # uvicorn app:app --reload --host 0.0.0.0 --port 5678
 from __future__ import annotations
 
-from pathlib import Path
 import json
+from pathlib import Path
 from typing import List, Union
 
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
-
-
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
-from common import get_logger, LoggingMiddleware
-
+from common import LoggingMiddleware, get_logger
 
 HERE = Path(__file__).parent
 log_file_path = HERE / "app.log"
@@ -31,19 +28,21 @@ app.add_middleware(LoggingMiddleware, log=logger.info)
 
 templates = Jinja2Templates(directory="templates", trim_blocks=True, lstrip_blocks=True)
 
+
 def get_questions() -> List[dict]:
     with open(questions_file_path, "r") as f:
         return json.load(f)
 
+
 def get_pin() -> str:
     with open(pin_file_path, "r") as f:
         return f.read().strip()
-    
+
 
 def get_hidden_words_zubenka() -> str:
     with open(words_zubenka_file_path, "r") as f:
         return f.read().strip()
-    
+
 
 def get_hidden_words_ajtak() -> str:
     with open(words_ajtak_file_path, "r") as f:
@@ -75,14 +74,27 @@ async def level_0_get_for_everything(request: Request):
     if pin == get_pin():
         return templates.TemplateResponse(
             "quiz_ajtak.html",
-            {"request": request, "method": "get", "level": 0, "token": None, "invalid_pin": False, "hidden_message": get_hidden_words_ajtak()},
+            {
+                "request": request,
+                "method": "get",
+                "level": 0,
+                "token": None,
+                "invalid_pin": False,
+                "hidden_message": get_hidden_words_ajtak(),
+            },
         )
     else:
         return templates.TemplateResponse(
             "quiz_ajtak.html",
-            {"request": request, "method": "get", "level": 0, "token": None, "invalid_pin": pin is not None, "hidden_message": None},
+            {
+                "request": request,
+                "method": "get",
+                "level": 0,
+                "token": None,
+                "invalid_pin": pin is not None,
+                "hidden_message": None,
+            },
         )
-
 
 
 @app.get("/quiz/zubenka/")
@@ -114,14 +126,19 @@ async def submit_quiz(quiz_data: QuizData):
     is_correct = True
     for answer in quiz_data.answers:
         connected_question = next(
-            (question for question in questions if question["id"] == answer.question_id), None
-        ) 
+            (
+                question
+                for question in questions
+                if question["id"] == answer.question_id
+            ),
+            None,
+        )
         if connected_question is None:
             print("Question not found")
             is_correct = False
             break
 
-        if connected_question["answer"] != answer.answer:
+        if connected_question["answer"].lower() != answer.answer.lower():
             print("Incorrect")
             is_correct = False
             break
@@ -130,5 +147,5 @@ async def submit_quiz(quiz_data: QuizData):
         message = "Správně! " + get_hidden_words_zubenka()
     else:
         message = "Špatně!"
-    
+
     return {"message": message, "is_correct": is_correct}
